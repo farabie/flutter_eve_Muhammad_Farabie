@@ -213,7 +213,7 @@ class ProfilePage extends StatelessWidget {
                   CustomButton(
                     nameButton: "Sign Out",
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => LoginSosmedPage(),
