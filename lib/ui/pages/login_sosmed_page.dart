@@ -119,7 +119,14 @@ class LoginSosmedPage extends StatelessWidget {
                           fontSize: 15, fontWeight: FontWeight.w400),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      },
                       child: Text(
                         "Sign Up",
                         style: blueTextFont.copyWith(
