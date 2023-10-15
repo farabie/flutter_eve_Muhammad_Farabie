@@ -96,7 +96,16 @@ class SignInPage extends StatelessWidget {
                       const SizedBox(
                         height: 64,
                       ),
-                      CustomButton(nameButton: "Sign In", onTap: () {}),
+                      CustomButton(
+                        nameButton: "Sign In",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfilePage(),
+                              ));
+                        },
+                      ),
                       const SizedBox(
                         height: defaultMargin,
                       ),

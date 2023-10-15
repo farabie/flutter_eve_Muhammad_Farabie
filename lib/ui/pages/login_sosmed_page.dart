@@ -105,7 +105,14 @@ class LoginSosmedPage extends StatelessWidget {
                 ),
                 CustomButton(
                   nameButton: "Sign In With Password",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignInPage(),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: defaultMargin,

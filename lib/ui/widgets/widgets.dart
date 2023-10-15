@@ -5,3 +5,4 @@ part 'custom_sosmed_widget.dart';
 part 'custom_button_widget.dart';
 part 'custom_textfield_widget.dart';
 part 'custom_circle_sosmed.dart';
+part 'custom_categories_interest.dart';
