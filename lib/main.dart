@@ -20,7 +20,7 @@ class SyakilaBakeryApp extends StatelessWidget {
     return StreamProvider<auth.User?>.value(
       initialData: null,
       value: AuthServices.userStream,
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Wrapper(),
       ),

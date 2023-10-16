@@ -2,6 +2,7 @@ part of 'services.dart';
 
 class AuthServices {
   static auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+  static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<SignInSignUpResult> signUp(
       String email, String password, String fullName) async {
@@ -33,12 +34,40 @@ class AuthServices {
       User user = await result.fromFireStore();
       return SignInSignUpResult(user: user);
     } catch (e) {
-      final errorParts = e.toString().split(',');
-      if (errorParts.length > 1) {
-        return SignInSignUpResult(message: errorParts[1].trim());
-      } else {
-        return SignInSignUpResult(message: e.toString());
+      String errorMessage = 'Email dan Password Salah Coba Masukan Lagi';
+      if (e is auth.FirebaseAuthException) {
+        if (e.code == 'firebase_auth/INVALID_LOGIN_CREDENTIALS') {
+          errorMessage =
+              "Kredensial login tidak valid. Periksa email dan kata sandi Anda.";
+        }
       }
+      return SignInSignUpResult(message: errorMessage);
+    }
+  }
+
+  static Future<SignInSignUpResult> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return SignInSignUpResult(message: "Login dengan Google dibatalkan");
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final auth.UserCredential result =
+          await _auth.signInWithCredential(credential);
+      final String fullName = googleUser.displayName ?? "No Name";
+
+      final User user = result.convertToUser(fullName: fullName);
+
+      return SignInSignUpResult(user: user);
+    } catch (e) {
+      return SignInSignUpResult(message: "Gagal masuk dengan Google: $e");
     }
   }
 

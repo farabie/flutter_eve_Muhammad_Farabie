@@ -12,7 +12,20 @@
           "package_name": "com.evetech.syakila_bakery_application"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1087336093004-in7g0hvpc8lrvu4gvf5g4gj078f1ehi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.evetech.syakila_bakery_application",
+            "certificate_hash": "a4c7e7e601f82517c1028fc7ad194416aa942cc7"
+          }
+        },
+        {
+          "client_id": "1087336093004-t5rgb6j5ia258h6u1aht8bnghvrno69p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8cj-QPh0u7RrIrKqUsi7bzkvTG7OK_dA"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087336093004-t5rgb6j5ia258h6u1aht8bnghvrno69p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

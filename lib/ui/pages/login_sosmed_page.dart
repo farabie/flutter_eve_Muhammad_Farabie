@@ -73,29 +73,54 @@ class LoginSosmedPage extends StatelessWidget {
                 const SizedBox(
                   height: defaultMargin,
                 ),
-                const CustomSosmeWidget(
+                CustomSosmeWidget(
                   nameSosmed: "Facebook",
                   imageSosmed: "assets/logo_facebook.png",
+                  onTap: () {},
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const CustomSosmeWidget(
+                CustomSosmeWidget(
                   nameSosmed: "Google",
                   imageSosmed: "assets/logo_google.png",
+                  onTap: () async {
+                    final result = await AuthServices.signInWithGoogle();
+                    if (result.user != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    } else {
+                      final errorMessage = result.message ??
+                          "Terjadi kesalahan saat masuk dengan Google";
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(errorMessage),
+                      ));
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const CustomSosmeWidget(
+                CustomSosmeWidget(
                   nameSosmed: "Apple",
                   imageSosmed: "assets/logo_apple.png",
+                  onTap: () {},
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 Text(
                   "Or",
+                  style: blackTextFont.copyWith(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  "Nama",
                   style: blackTextFont.copyWith(
                     fontSize: 20,
                   ),

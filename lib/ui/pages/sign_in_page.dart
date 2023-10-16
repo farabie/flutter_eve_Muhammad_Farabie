@@ -98,12 +98,22 @@ class SignInPage extends StatelessWidget {
                       ),
                       CustomButton(
                         nameButton: "Sign In",
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProfilePage(),
-                              ));
+                        onTap: () async {
+                          SignInSignUpResult result = await AuthServices.signIn(
+                            "farabie12@gmail.com",
+                            "Farabie123",
+                          );
+
+                          if (result.user == null) {
+                            print(result.message);
+                          } else {
+                            print(result.user.toString());
+                          }
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => ProfilePage(),
+                          //     ));
                         },
                       ),
                       const SizedBox(
@@ -147,7 +157,7 @@ class SignInPage extends StatelessWidget {
                                 fontSize: 15, fontWeight: FontWeight.w400),
                           ),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
