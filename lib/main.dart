@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:syakila_bakery_application/services/services.dart';
 import 'package:syakila_bakery_application/ui/pages/pages.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized.
+  // Initialize Firebase.
+  await Firebase.initializeApp();
   runApp(const SyakilaBakeryApp());
 }
 
@@ -10,9 +17,13 @@ class SyakilaBakeryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+    return StreamProvider<auth.User?>.value(
+      initialData: null,
+      value: AuthServices.userStream,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Wrapper(),
+      ),
     );
   }
 }

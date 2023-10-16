@@ -105,7 +105,20 @@ class SignUpPage extends StatelessWidget {
                       const SizedBox(
                         height: 64,
                       ),
-                      CustomButton(nameButton: "Sign In", onTap: () {}),
+                      CustomButton(
+                        nameButton: "Sign Up",
+                        onTap: () async {
+                          SignInSignUpResult result = await AuthServices.signUp(
+                              "farabie12@gmail.com",
+                              "Farabie123",
+                              "Muhammad Farabie");
+                          if (result.user == null) {
+                            print(result.message);
+                          } else {
+                            print(result.user.toString());
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: defaultMargin,
                       ),
