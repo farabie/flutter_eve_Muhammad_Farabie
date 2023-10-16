@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1087336093004",
+    "project_id": "syakila-bakery-app",
+    "storage_bucket": "syakila-bakery-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087336093004:android:3de3049529b489ca722be9",
+        "android_client_info": {
+          "package_name": "com.evetech.syakila_bakery_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8cj-QPh0u7RrIrKqUsi7bzkvTG7OK_dA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
