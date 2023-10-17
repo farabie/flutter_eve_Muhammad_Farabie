@@ -93,12 +93,9 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                   onTap: () async {
                     final result = await AuthServices.signInWithGoogle();
                     if (result.user != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),
-                        ),
-                      );
+                      Get.off(() => ProfilePage(
+                            fullNameSosmed: result.user?.fullName,
+                          ));
                     } else {
                       final errorMessage = result.message ??
                           "Terjadi kesalahan saat masuk dengan Google";
@@ -131,11 +128,8 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                 CustomButton(
                   nameButton: "Sign In With Password",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignInPage(),
-                      ),
+                    Get.to(
+                      () => SignInPage(),
                     );
                   },
                 ),
@@ -152,12 +146,9 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpPage(
-                              registrationData: registrationData,
-                            ),
+                        Get.to(
+                          () => SignUpPage(
+                            registrationData: registrationData,
                           ),
                         );
                       },

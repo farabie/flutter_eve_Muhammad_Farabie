@@ -1,8 +1,13 @@
 part of 'pages.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     RegistrationData registrationData = RegistrationData();
@@ -100,21 +105,45 @@ class SignInPage extends StatelessWidget {
                       CustomButton(
                         nameButton: "Sign In",
                         onTap: () async {
-                          SignInSignUpResult result = await AuthServices.signIn(
-                            "farabie12@gmail.com",
-                            "Farabie123",
-                          );
-
-                          if (result.user == null) {
-                            print(result.message);
+                          if (!(emailController.text.trim() != "" &&
+                              passwordController.text.trim() != "")) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Please fill all the fields",
+                            )..show(context);
+                          } else if (passwordController.text.length < 6) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Password's length min 6 characters",
+                            )..show(context);
+                          } else if (!EmailValidator.validate(
+                              emailController.text)) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Wrong formatted email address",
+                            )..show(context);
                           } else {
-                            print(result.user.toString());
+                            SignInSignUpResult result =
+                                await AuthServices.signIn(
+                              emailController.text,
+                              passwordController.text,
+                            );
+
+                            if (result.user != null) {
+                              Get.off(() => ProfilePage(
+                                    registrationData: registrationData,
+                                    fullNameFromLogin: result.user?.fullName,
+                                  ));
+                            } else {
+                              print(result.message);
+                            }
                           }
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => ProfilePage(),
-                          //     ));
                         },
                       ),
                       const SizedBox(
@@ -159,12 +188,9 @@ class SignInPage extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(
-                                    registrationData: registrationData,
-                                  ),
+                              Get.to(
+                                () => SignUpPage(
+                                  registrationData: registrationData,
                                 ),
                               );
                             },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:syakila_bakery_application/services/services.dart';
 import 'package:syakila_bakery_application/ui/pages/pages.dart';
@@ -19,7 +20,7 @@ class SyakilaBakeryApp extends StatelessWidget {
     return StreamProvider<auth.User?>.value(
       initialData: null,
       value: AuthServices.userStream,
-      child: const MaterialApp(
+      child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
       ),

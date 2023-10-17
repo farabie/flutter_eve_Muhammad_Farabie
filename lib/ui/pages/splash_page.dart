@@ -103,12 +103,4 @@ class _SplashPageState extends State<SplashPage> {
       });
     }
   }
-
-  // void onDone() {
-  //   Navigator.of(context).pushReplacement(
-  //     MaterialPageRoute(
-  //       builder: (context) => LoginSosmedPage(),
-  //     ),
-  //   );
-  // }
 }

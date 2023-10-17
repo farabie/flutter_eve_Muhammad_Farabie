@@ -1,10 +1,21 @@
 part of 'pages.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  RegistrationData? registrationData = RegistrationData();
+  final String? fullNameFromLogin;
+  final String? fullNameSosmed;
+  ProfilePage({
+    super.key,
+    this.registrationData,
+    this.fullNameFromLogin,
+    this.fullNameSosmed,
+  });
 
   @override
   Widget build(BuildContext context) {
+    String fullName = fullNameFromLogin ??
+        fullNameSosmed ??
+        (registrationData?.fullName ?? "User");
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -45,7 +56,7 @@ class ProfilePage extends StatelessWidget {
                     height: 16,
                   ),
                   Text(
-                    "Annie Shayna",
+                    fullName,
                     style: blackTextFont.copyWith(
                       fontSize: 20,
                     ),
@@ -213,12 +224,7 @@ class ProfilePage extends StatelessWidget {
                   CustomButton(
                     nameButton: "Sign Out",
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginSosmedPage(),
-                        ),
-                      );
+                      Get.offAll(() => LoginSosmedPage());
                     },
                   ),
                 ],

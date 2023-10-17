@@ -1,7 +1,7 @@
 part of 'pages.dart';
 
 class SignUpPage extends StatefulWidget {
-  final RegistrationData registrationData;
+  RegistrationData registrationData;
   SignUpPage({Key? key, required this.registrationData}) : super(key: key);
 
   @override
@@ -122,14 +122,50 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomButton(
                         nameButton: "Sign Up",
                         onTap: () async {
-                          SignInSignUpResult result = await AuthServices.signUp(
-                              "farabie12@gmail.com",
-                              "Farabie123",
-                              "Muhammad Farabie");
-                          if (result.user == null) {
-                            print(result.message);
+                          if (!(fullNameController.text.trim() != "" &&
+                              emailController.text.trim() != "" &&
+                              passwordController.text.trim() != "")) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Please fill all the fields",
+                            )..show(context);
+                          } else if (passwordController.text.length < 6) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Password's length min 6 characters",
+                            )..show(context);
+                          } else if (!EmailValidator.validate(
+                              emailController.text)) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Wrong formatted email address",
+                            )..show(context);
                           } else {
-                            print(result.user.toString());
+                            widget.registrationData = RegistrationData(
+                              fullName: fullNameController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+
+                            SignInSignUpResult result =
+                                await AuthServices.signUp(
+                              emailController.text,
+                              passwordController.text,
+                              fullNameController.text,
+                            );
+                            if (result.user == null) {
+                              print(result.message);
+                            } else {
+                              print(result.user.toString());
+                              Get.offAll(() => ProfilePage(
+                                  registrationData: widget.registrationData));
+                            }
                           }
                         },
                       ),
@@ -175,11 +211,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignInPage(),
-                                ),
+                              Get.to(
+                                () => SignInPage(),
                               );
                             },
                             child: Text(
