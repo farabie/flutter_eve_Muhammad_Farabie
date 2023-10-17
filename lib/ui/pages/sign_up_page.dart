@@ -126,26 +126,26 @@ class _SignUpPageState extends State<SignUpPage> {
                               emailController.text.trim() != "" &&
                               passwordController.text.trim() != "")) {
                             Flushbar(
-                              duration: Duration(milliseconds: 1500),
+                              duration: const Duration(milliseconds: 1500),
                               flushbarPosition: FlushbarPosition.TOP,
-                              backgroundColor: Color(0xFFFF5C83),
+                              backgroundColor: const Color(0xFFFF5C83),
                               message: "Please fill all the fields",
-                            )..show(context);
+                            ).show(context);
                           } else if (passwordController.text.length < 6) {
                             Flushbar(
-                              duration: Duration(milliseconds: 1500),
+                              duration: const Duration(milliseconds: 1500),
                               flushbarPosition: FlushbarPosition.TOP,
-                              backgroundColor: Color(0xFFFF5C83),
+                              backgroundColor: const Color(0xFFFF5C83),
                               message: "Password's length min 6 characters",
-                            )..show(context);
+                            ).show(context);
                           } else if (!EmailValidator.validate(
                               emailController.text)) {
                             Flushbar(
-                              duration: Duration(milliseconds: 1500),
+                              duration: const Duration(milliseconds: 1500),
                               flushbarPosition: FlushbarPosition.TOP,
-                              backgroundColor: Color(0xFFFF5C83),
+                              backgroundColor: const Color(0xFFFF5C83),
                               message: "Wrong formatted email address",
-                            )..show(context);
+                            ).show(context);
                           } else {
                             widget.registrationData = RegistrationData(
                               fullName: fullNameController.text,
@@ -189,12 +189,30 @@ class _SignUpPageState extends State<SignUpPage> {
                         children: <Widget>[
                           CustomCircleSosmed(
                             imageAsset: "assets/logo_facebook.png",
+                            onTap: () {},
                           ),
                           CustomCircleSosmed(
                             imageAsset: "assets/logo_google.png",
+                            onTap: () async {
+                              final result =
+                                  await AuthServices.signInWithGoogle();
+                              if (result.user != null) {
+                                Get.off(() => ProfilePage(
+                                      fullNameSosmed: result.user?.fullName,
+                                    ));
+                              } else {
+                                final errorMessage = result.message ??
+                                    "Terjadi kesalahan saat masuk dengan Google";
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(errorMessage),
+                                ));
+                              }
+                            },
                           ),
                           CustomCircleSosmed(
                             imageAsset: "assets/logo_apple.png",
+                            onTap: () {},
                           ),
                         ],
                       ),
@@ -212,7 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           GestureDetector(
                             onTap: () {
                               Get.to(
-                                () => SignInPage(),
+                                () => const SignInPage(),
                               );
                             },
                             child: Text(

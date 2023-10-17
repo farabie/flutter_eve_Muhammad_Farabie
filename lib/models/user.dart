@@ -10,7 +10,7 @@ class User extends Equatable {
     return "{$id} - $fullName, $email";
   }
 
-  User(
+  const User(
     this.id,
     this.email, {
     this.fullName = "",

@@ -1,11 +1,7 @@
 import 'dart:async';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:syakila_bakery_application/getx/getx.dart';
 import 'package:syakila_bakery_application/models/models.dart';
 import 'package:syakila_bakery_application/services/services.dart';
 import 'package:syakila_bakery_application/shared/shared.dart';

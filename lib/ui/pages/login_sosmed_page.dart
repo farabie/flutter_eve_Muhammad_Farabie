@@ -129,7 +129,7 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                   nameButton: "Sign In With Password",
                   onTap: () {
                     Get.to(
-                      () => SignInPage(),
+                      () => const SignInPage(),
                     );
                   },
                 ),

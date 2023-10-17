@@ -1,7 +1,7 @@
 part of 'services.dart';
 
 class AuthServices {
-  static auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
+  static final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<SignInSignUpResult> signUp(

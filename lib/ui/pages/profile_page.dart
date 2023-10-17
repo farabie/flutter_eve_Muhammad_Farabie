@@ -42,7 +42,7 @@ class ProfilePage extends StatelessWidget {
                   Container(
                     width: 100,
                     height: 100,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         image: AssetImage(
@@ -224,8 +224,11 @@ class ProfilePage extends StatelessWidget {
                   CustomButton(
                     nameButton: "Sign Out",
                     onTap: () {
-                      Get.offAll(() => LoginSosmedPage());
+                      Get.offAll(() => const LoginSosmedPage());
                     },
+                  ),
+                  const SizedBox(
+                    height: 50,
                   ),
                 ],
               ),

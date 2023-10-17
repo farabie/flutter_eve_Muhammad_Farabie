@@ -64,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<Timer> startTimer() async {
-    return Timer(Duration(seconds: 5), checkFirebaseUser);
+    return Timer(const Duration(seconds: 5), checkFirebaseUser);
   }
 
   void checkFirebaseUser() {
@@ -72,7 +72,7 @@ class _SplashPageState extends State<SplashPage> {
     if (firebaseUser == null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => LoginSosmedPage(),
+          builder: (context) => const LoginSosmedPage(),
         ),
       );
     } else {
@@ -94,7 +94,7 @@ class _SplashPageState extends State<SplashPage> {
         print('User is not authenticated with Google.');
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => LoginSosmedPage(),
+            builder: (context) => const LoginSosmedPage(),
           ),
         );
       }
