@@ -1,8 +1,14 @@
 part of 'pages.dart';
 
-class LoginSosmedPage extends StatelessWidget {
+class LoginSosmedPage extends StatefulWidget {
   const LoginSosmedPage({super.key});
 
+  @override
+  State<LoginSosmedPage> createState() => _LoginSosmedPageState();
+}
+
+class _LoginSosmedPageState extends State<LoginSosmedPage> {
+  final RegistrationData registrationData = RegistrationData();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,12 +125,6 @@ class LoginSosmedPage extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-                Text(
-                  "Nama",
-                  style: blackTextFont.copyWith(
-                    fontSize: 20,
-                  ),
-                ),
                 const SizedBox(
                   height: defaultMargin,
                 ),
@@ -155,7 +155,9 @@ class LoginSosmedPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SignUpPage(),
+                            builder: (context) => SignUpPage(
+                              registrationData: registrationData,
+                            ),
                           ),
                         );
                       },
@@ -168,6 +170,9 @@ class LoginSosmedPage extends StatelessWidget {
                       ),
                     )
                   ],
+                ),
+                const SizedBox(
+                  height: 50,
                 )
               ],
             ),

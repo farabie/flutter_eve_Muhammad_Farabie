@@ -1,13 +1,27 @@
 part of 'pages.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignUpPage extends StatefulWidget {
+  final RegistrationData registrationData;
+  SignUpPage({Key? key, required this.registrationData}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fullNameController.text = widget.registrationData.fullName;
+    emailController.text = widget.registrationData.email;
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController fullNameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -180,6 +194,9 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 50,
                 )
               ],
             )

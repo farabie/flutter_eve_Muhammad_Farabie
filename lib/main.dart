@@ -6,8 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter is initialized.
-  // Initialize Firebase.
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const SyakilaBakeryApp());
 }
@@ -22,7 +21,7 @@ class SyakilaBakeryApp extends StatelessWidget {
       value: AuthServices.userStream,
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Wrapper(),
+        home: SplashPage(),
       ),
     );
   }

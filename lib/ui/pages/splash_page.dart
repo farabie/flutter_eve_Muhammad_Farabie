@@ -8,10 +8,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  bool isLoading = true;
   @override
   void initState() {
-    startTimer();
     super.initState();
+    startTimer();
   }
 
   @override
@@ -47,21 +48,67 @@ class _SplashPageState extends State<SplashPage> {
                 ),
               ),
             ],
-          )
+          ),
+          if (isLoading)
+            Container(
+              height: 30,
+              width: 30,
+              margin: const EdgeInsets.only(top: 40),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(mainColor),
+              ),
+            )
         ],
       ),
     );
   }
 
   Future<Timer> startTimer() async {
-    return Timer(Duration(seconds: 3), onDone);
+    return Timer(Duration(seconds: 5), checkFirebaseUser);
   }
 
-  void onDone() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => LoginSosmedPage(),
-      ),
-    );
+  void checkFirebaseUser() {
+    final firebaseUser = Provider.of<auth.User?>(context, listen: false);
+    if (firebaseUser == null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => LoginSosmedPage(),
+        ),
+      );
+    } else {
+      bool isGoogleSignIn = false;
+      for (var userInfo in firebaseUser.providerData) {
+        if (userInfo.providerId == 'google.com') {
+          isGoogleSignIn = true;
+          break;
+        }
+      }
+      if (isGoogleSignIn) {
+        print('User is authenticated with Google.');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ProfilePage(),
+          ),
+        );
+      } else {
+        print('User is not authenticated with Google.');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => LoginSosmedPage(),
+          ),
+        );
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
+
+  // void onDone() {
+  //   Navigator.of(context).pushReplacement(
+  //     MaterialPageRoute(
+  //       builder: (context) => LoginSosmedPage(),
+  //     ),
+  //   );
+  // }
 }

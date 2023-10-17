@@ -5,6 +5,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RegistrationData registrationData = RegistrationData();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
@@ -161,7 +162,9 @@ class SignInPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const SignUpPage(),
+                                  builder: (context) => SignUpPage(
+                                    registrationData: registrationData,
+                                  ),
                                 ),
                               );
                             },
@@ -174,6 +177,9 @@ class SignInPage extends StatelessWidget {
                             ),
                           )
                         ],
+                      ),
+                      const SizedBox(
+                        height: 50,
                       ),
                     ],
                   ),
